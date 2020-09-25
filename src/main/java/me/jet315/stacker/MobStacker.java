@@ -2,10 +2,7 @@ package me.jet315.stacker;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import me.jet315.stacker.commands.CommandHandler;
-import me.jet315.stacker.events.OnEntityDamage;
-import me.jet315.stacker.events.OnEntityDeath;
-import me.jet315.stacker.events.OnEntitySpawn;
-import me.jet315.stacker.events.OnSlimeSplit;
+import me.jet315.stacker.events.*;
 import me.jet315.stacker.manager.EntityStackerManager;
 import me.jet315.stacker.manager.StackEntity;
 import me.jet315.stacker.util.Config;
@@ -42,6 +39,8 @@ public class MobStacker extends JavaPlugin{
         // Register listeners
         Bukkit.getPluginManager().registerEvents(new OnEntityDeath(), this);
         Bukkit.getPluginManager().registerEvents(new OnEntityDamage(), this);
+        Bukkit.getPluginManager().registerEvents(new OnEntityDropItem(), this);
+        Bukkit.getPluginManager().registerEvents(new OnEntityFeed(), this);
 
         //World Guard
         Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");

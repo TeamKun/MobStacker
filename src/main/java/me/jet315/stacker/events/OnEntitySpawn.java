@@ -23,7 +23,7 @@ public class OnEntitySpawn implements Listener {
         if(e.getEntity().getType() == EntityType.SLIME){
             Slime slime = (Slime) e.getEntity();
             //valid display name
-            if(MobStacker.getInstance().getStackEntity().parseAmount(slime.getCustomName()) != -1){
+            if(MobStacker.getInstance().getStackEntity().parseAmount(slime) != -1){
                 slime.setSize(4);
             }
         }

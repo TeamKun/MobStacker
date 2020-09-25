@@ -48,7 +48,7 @@ public class OnEntityDeath implements Listener{
 
 
     public int multiplyDropsReturnExp(LivingEntity dead, List<ItemStack> drops){
-        int amountToMultiply = MobStacker.getInstance().getStackEntity().parseAmount(dead.getCustomName());
+        int amountToMultiply = MobStacker.getInstance().getStackEntity().parseAmount(dead);
         if(amountToMultiply <=1) return 1;
         for(ItemStack i : drops){
             ItemStack item = new ItemStack(i);

@@ -1,18 +1,18 @@
 package me.jet315.stacker.manager;
 
-import com.sk89q.worldedit.regions.Region;
-import com.sk89q.worldguard.bukkit.WGBukkit;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import me.jet315.stacker.MobStacker;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Tameable;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -77,7 +77,10 @@ public class EntityStackerManager {
             return false;
         }
         if(MobStacker.getInstance().getMobStackerConfig().worldguardEnabled) {
-            ApplicableRegionSet region = WGBukkit.getRegionManager(entity.getWorld()).getApplicableRegions(entity.getLocation());
+            ApplicableRegionSet region = WorldGuard.getInstance()
+                    .getPlatform().getRegionContainer()
+                    .get(BukkitAdapter.adapt(entity.getWorld()))
+                    .getApplicableRegions(BukkitAdapter.adapt(entity.getLocation()).toVector().toBlockPoint());
             for(ProtectedRegion r : region.getRegions()){
                 for(String s : MobStacker.getInstance().getMobStackerConfig().disabledRegions){
                     if(r.getId().equalsIgnoreCase(s)){
