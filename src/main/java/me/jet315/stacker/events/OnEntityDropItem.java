@@ -1,8 +1,10 @@
 package me.jet315.stacker.events;
 
 import me.jet315.stacker.MobStacker;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -27,11 +29,15 @@ public class OnEntityDropItem implements Listener {
         }
 
         if (entity.getType() != EntityType.PLAYER) {
+            ItemStack item = e.getItemDrop().getItemStack();
+            if (item.getType() == Material.LEAD)
+                return;
+
             int amount = MobStacker.getInstance().getStackEntity().parseAmount(entity);
             if (amount > 1) {
-                ItemStack item = new ItemStack(e.getItemDrop().getItemStack());
-                item.setAmount(amount - 1);
-                entity.getWorld().dropItem(entity.getLocation(), item);
+                ItemStack itemStack = new ItemStack(item);
+                itemStack.setAmount(amount - 1);
+                entity.getWorld().dropItem(entity.getLocation(), itemStack);
             }
         }
     }
