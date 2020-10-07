@@ -132,9 +132,9 @@ public class StackEntity {
     }
 
     public int parseAmount(Entity target) {
-        if (!target.hasMetadata("stack")) {
-            return parseAmount(target.getCustomName()); // No metadata, therefor not a stack.
-        }
+//        if (!target.hasMetadata("stack")) {
+//            return parseAmount(target.getCustomName()); // No metadata, therefor not a stack.
+//        }
 
         return target.getMetadata("stack").stream().findFirst().map(e -> {
             if (e.value() instanceof Integer)
